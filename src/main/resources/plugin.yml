@@ -1,0 +1,11 @@
+name: panelQuiz
+version: '1.0-SNAPSHOT'
+main: ramune314159265.panelQuiz.PanelQuiz
+api-version: '1.20'
+authors: [ ramune314159265 ]
+description: Minecraft PanelQuiz
+commands:
+  startQuiz:
+    description: Start a new quiz
+    permission: panelQuiz.command.startquiz
+    usage: /startquiz <quizType> <question> <quizColumn>
