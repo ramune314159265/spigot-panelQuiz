@@ -13,6 +13,10 @@ commands:
     description: Answer the question
     aliases: [ aq ]
     usage: /answerquestion <index>
+  lockQuiz:
+    description: Lock the question
+    permission: panelQuiz.command.lockquiz
+    usage: /lockquestion
 
 permissions:
   panelQuiz.command.*:
@@ -21,4 +25,7 @@ permissions:
       wsconnectionplugin.command.startquiz: true
   panelQuiz.command.startquiz:
     description: Allows you to perform /startquiz command.
+    default: op
+  panelQuiz.command.lockquiz:
+    description: Allows you to perform /lockquiz command.
     default: op
