@@ -42,8 +42,12 @@ public class AnswerQuestionCommand implements CommandExecutor {
 							return Collections.emptyList();
 						}
 
-						PanelQuiz.getInstance().processingQuiz.answerQuestion(index, sender.getName(), stateSnapshot.getText());
-						sender.sendMessage(ChatColor.GREEN + "「" + stateSnapshot.getText() + "」と回答しました");
+						boolean isSucceeded = PanelQuiz.getInstance().processingQuiz.answerQuestion(index, sender.getName(), stateSnapshot.getText());
+						if(isSucceeded){
+							sender.sendMessage(ChatColor.GREEN + "「" + stateSnapshot.getText() + "」と回答しました");
+						} else {
+							sender.sendMessage(ChatColor.RED + "正しく入力されていません");
+						}
 						return Arrays.asList(AnvilGUI.ResponseAction.close());
 					})
 					.text(defaultMessage)

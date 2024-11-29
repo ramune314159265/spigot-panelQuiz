@@ -2,8 +2,11 @@ package ramune314159265.panelQuiz.quiztypes;
 
 import ramune314159265.panelQuiz.State;
 
+import java.util.HashMap;
+
 public class FiveLeague extends Quiz {
 	public FiveLeague(String question, String quizColumn) {
+		this.answers = new HashMap<>();
 		this.question = question;
 		this.quizColumn = quizColumn;
 		this.state = State.ANSWERING;
@@ -12,7 +15,7 @@ public class FiveLeague extends Quiz {
 
 	@Override
 	public boolean answerQuestion(Integer index, String answererName, String answer) {
-		if (answererName.length() != 1) {
+		if (answer.length() != 1) {
 			return false;
 		}
 		this.answers.put(index, answer);
