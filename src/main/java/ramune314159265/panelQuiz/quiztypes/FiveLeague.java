@@ -7,6 +7,7 @@ public class FiveLeague extends Quiz {
 		this.question = question;
 		this.quizColumn = quizColumn;
 		this.state = State.ANSWERING;
+		this.maximumIndex = 0;
 	}
 
 	@Override
@@ -15,6 +16,7 @@ public class FiveLeague extends Quiz {
 			return false;
 		}
 		this.answers.put(index, answer);
+		this.maximumIndex = Math.max(index, this.maximumIndex);
 		return true;
 	}
 

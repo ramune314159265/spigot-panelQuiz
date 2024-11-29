@@ -9,6 +9,7 @@ abstract public class Quiz {
 	public String question;
 	public String quizColumn;
 	public State state;
+	public Integer maximumIndex;
 
 	abstract public boolean answerQuestion(Integer index, String answererName, String answer);
 
