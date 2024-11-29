@@ -43,7 +43,7 @@ public class AnswerQuestionCommand implements CommandExecutor {
 						}
 
 						boolean isSucceeded = PanelQuiz.getInstance().processingQuiz.answerQuestion(index, sender.getName(), stateSnapshot.getText());
-						if(isSucceeded){
+						if (isSucceeded) {
 							sender.sendMessage(ChatColor.GREEN + "「" + stateSnapshot.getText() + "」と回答しました");
 						} else {
 							sender.sendMessage(ChatColor.RED + "正しく入力されていません");
