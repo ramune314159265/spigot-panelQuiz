@@ -10,11 +10,16 @@ public class FiveLeague extends Quiz {
 	}
 
 	@Override
-	boolean anwerQuetion(Integer index, String answererName, String answer) {
+	public boolean answerQuestion(Integer index, String answererName, String answer) {
 		if (answererName.length() != 1) {
 			return false;
 		}
 		this.answers.put(index, answer);
 		return true;
+	}
+
+	@Override
+	public boolean isAnswerable() {
+		return this.state == State.ANSWERING;
 	}
 }

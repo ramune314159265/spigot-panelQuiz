@@ -18,15 +18,15 @@ public class StartQuizCommand implements CommandExecutor, TabCompleter {
 		if (args.length != 3) {
 			return false;
 		}
-		if(PanelQuiz.getInstance().isQuizProcessing()){
-			sender.sendMessage( ChatColor.RED + "クイズ「" + PanelQuiz.getInstance().processingQuiz.question + "」が進行中です");
+		if (PanelQuiz.getInstance().isQuizProcessing()) {
+			sender.sendMessage(ChatColor.RED + "クイズ「" + PanelQuiz.getInstance().processingQuiz.question + "」が進行中です");
 			return true;
 		}
 		String quizType = args[0];
 		String quizTitle = args[1];
 		String quizColumn = args[2];
 
-		switch (quizType){
+		switch (quizType) {
 			case "fiveleague":
 				Quiz quizInstance = new FiveLeague(quizTitle, quizColumn);
 				PanelQuiz.getInstance().startQuiz(quizInstance);
@@ -37,9 +37,10 @@ public class StartQuizCommand implements CommandExecutor, TabCompleter {
 		sender.sendMessage("クイズ「" + quizTitle + ChatColor.RESET + "」を開始しました");
 		return true;
 	}
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		if(!command.getName().equalsIgnoreCase("startquiz")){
+		if (!command.getName().equalsIgnoreCase("startquiz")) {
 			return null;
 		}
 		if (args.length == 1) {

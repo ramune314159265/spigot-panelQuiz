@@ -9,3 +9,16 @@ commands:
     description: Start a new quiz
     permission: panelQuiz.command.startquiz
     usage: /startquiz <quizType> <question> <quizColumn>
+  answerQuestion:
+    description: Answer the question
+    aliases: [ aq ]
+    usage: /answerquestion <index>
+
+permissions:
+  panelQuiz.command.*:
+    description: Allows you to perform commands in this plugin.
+    children:
+      wsconnectionplugin.command.startquiz: true
+  panelQuiz.command.startquiz:
+    description: Allows you to perform /startquiz command.
+    default: op

@@ -10,5 +10,7 @@ abstract public class Quiz {
 	public String quizColumn;
 	public State state;
 
-	abstract boolean anwerQuetion(Integer index, String answererName, String answer);
+	abstract public boolean answerQuestion(Integer index, String answererName, String answer);
+
+	abstract public boolean isAnswerable();
 }

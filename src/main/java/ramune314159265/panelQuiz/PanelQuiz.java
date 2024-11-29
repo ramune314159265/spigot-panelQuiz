@@ -1,6 +1,7 @@
 package ramune314159265.panelQuiz;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import ramune314159265.panelQuiz.commands.AnswerQuestionCommand;
 import ramune314159265.panelQuiz.commands.StartQuizCommand;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
 
@@ -18,6 +19,7 @@ public final class PanelQuiz extends JavaPlugin {
 	public void onEnable() {
 		INSTANCE = this;
 		this.getCommand("startquiz").setExecutor(new StartQuizCommand());
+		this.getCommand("answerquestion").setExecutor(new AnswerQuestionCommand());
 	}
 
 	@Override
@@ -29,11 +31,11 @@ public final class PanelQuiz extends JavaPlugin {
 		this.processingQuiz = quizInstance;
 	}
 
-	public boolean isQuizProcessing(){
-		if(Objects.isNull(this.processingQuiz)){
+	public boolean isQuizProcessing() {
+		if (Objects.isNull(this.processingQuiz)) {
 			return false;
 		}
-		if(this.processingQuiz.state == State.JUDGED){
+		if (this.processingQuiz.state == State.JUDGED) {
 			return false;
 		}
 		return true;
