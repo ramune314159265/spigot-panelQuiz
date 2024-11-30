@@ -1,10 +1,7 @@
 package ramune314159265.panelQuiz;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import ramune314159265.panelQuiz.commands.AnswerQuestionCommand;
-import ramune314159265.panelQuiz.commands.LockQuizCommand;
-import ramune314159265.panelQuiz.commands.ShowQuizInfoCommand;
-import ramune314159265.panelQuiz.commands.StartQuizCommand;
+import ramune314159265.panelQuiz.commands.*;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
 
 import java.util.Objects;
@@ -24,6 +21,7 @@ public final class PanelQuiz extends JavaPlugin {
 		this.getCommand("answerquestion").setExecutor(new AnswerQuestionCommand());
 		this.getCommand("lockquiz").setExecutor(new LockQuizCommand());
 		this.getCommand("showquizinfo").setExecutor(new ShowQuizInfoCommand());
+		this.getCommand("judgeanswer").setExecutor(new JudgeAnswersCommand());
 	}
 
 	@Override

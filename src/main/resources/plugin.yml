@@ -21,6 +21,10 @@ commands:
     description: Show the question info
     permission: panelQuiz.command.showquizinfo
     usage: /showquizinfo
+  judgeAnswer:
+    description: Judge the answers
+    permission: panelQuiz.command.judgeanswer
+    usage: /judgeanswer [<index>] [<true|false>]
 
 permissions:
   panelQuiz.command.*:
@@ -37,4 +41,7 @@ permissions:
     default: op
   panelQuiz.command.showquizinfo:
     description: Allows you to perform /showquizinfo command.
+    default: op
+  panelQuiz.command.judgeanswer:
+    description: Allows you to perform /judgeanswer command.
     default: op
