@@ -1,9 +1,9 @@
 package ramune314159265.panelQuiz;
 
 public class AnswerData {
-	String content;
-	String answererName;
-	Boolean isCorrect;
+	public String content;
+	public String answererName;
+	public Boolean isCorrect;
 
 	public AnswerData(String content, String answererName) {
 		this.content = content;
