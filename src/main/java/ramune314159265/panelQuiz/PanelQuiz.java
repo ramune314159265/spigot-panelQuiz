@@ -22,6 +22,7 @@ public final class PanelQuiz extends JavaPlugin {
 		this.getCommand("lockquiz").setExecutor(new LockQuizCommand());
 		this.getCommand("showquizinfo").setExecutor(new ShowQuizInfoCommand());
 		this.getCommand("judgeanswer").setExecutor(new JudgeAnswersCommand());
+		this.getCommand("announcequiz").setExecutor(new AnnounceQuizCommand());
 	}
 
 	@Override

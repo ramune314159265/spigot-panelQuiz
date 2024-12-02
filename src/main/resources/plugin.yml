@@ -25,6 +25,10 @@ commands:
     description: Judge the answers
     permission: panelQuiz.command.judgeanswer
     usage: /judgeanswer [<index>] [<true|false>]
+  announceQuiz:
+    description: Judge the answers
+    permission: panelQuiz.command.announcequiz
+    usage: /announcequiz <preTitle>
 
 permissions:
   panelQuiz.command.*:
@@ -33,6 +37,8 @@ permissions:
       wsconnectionplugin.command.startquiz: true
       wsconnectionplugin.command.lockquiz: true
       wsconnectionplugin.command.showquizinfo: true
+      wsconnectionplugin.command.judgeanswer: true
+      wsconnectionplugin.command.announcequiz: true
   panelQuiz.command.startquiz:
     description: Allows you to perform /startquiz command.
     default: op
@@ -44,4 +50,7 @@ permissions:
     default: op
   panelQuiz.command.judgeanswer:
     description: Allows you to perform /judgeanswer command.
+    default: op
+  panelQuiz.command.announcequiz:
+    description: Allows you to perform /announcequiz command.
     default: op
