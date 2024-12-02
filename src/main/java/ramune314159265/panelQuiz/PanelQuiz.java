@@ -23,6 +23,7 @@ public final class PanelQuiz extends JavaPlugin {
 		this.getCommand("showquizinfo").setExecutor(new ShowQuizInfoCommand());
 		this.getCommand("judgeanswer").setExecutor(new JudgeAnswersCommand());
 		this.getCommand("announcequiz").setExecutor(new AnnounceQuizCommand());
+		this.getCommand("cancelquiz").setExecutor(new CancelQuizCommand());
 	}
 
 	@Override
@@ -32,6 +33,10 @@ public final class PanelQuiz extends JavaPlugin {
 
 	public void startQuiz(Quiz quizInstance) {
 		this.processingQuiz = quizInstance;
+	}
+
+	public void  cancelQuiz(){
+		this.processingQuiz = null;
 	}
 
 	public boolean isQuizProcessing() {

@@ -26,9 +26,13 @@ commands:
     permission: panelQuiz.command.judgeanswer
     usage: /judgeanswer [<index>] [<true|false>]
   announceQuiz:
-    description: Judge the answers
+    description: Announce the quiz
     permission: panelQuiz.command.announcequiz
     usage: /announcequiz <preTitle>
+  cancelQuiz:
+    description: Cancel the quiz
+    permission: panelQuiz.command.cancelquiz
+    usage: /cancelquiz
 
 permissions:
   panelQuiz.command.*:
@@ -39,6 +43,7 @@ permissions:
       wsconnectionplugin.command.showquizinfo: true
       wsconnectionplugin.command.judgeanswer: true
       wsconnectionplugin.command.announcequiz: true
+      wsconnectionplugin.command.cancelquiz: true
   panelQuiz.command.startquiz:
     description: Allows you to perform /startquiz command.
     default: op
@@ -53,4 +58,7 @@ permissions:
     default: op
   panelQuiz.command.announcequiz:
     description: Allows you to perform /announcequiz command.
+    default: op
+  panelQuiz.command.cancelquiz:
+    description: Allows you to perform /cancelquiz command.
     default: op
