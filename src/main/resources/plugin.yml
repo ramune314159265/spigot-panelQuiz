@@ -33,6 +33,10 @@ commands:
     description: Cancel the quiz
     permission: panelQuiz.command.cancelquiz
     usage: /cancelquiz
+  reloadPanelQuizPlugin:
+    description: Cancel the quiz
+    permission: panelQuiz.command.reload
+    usage: /reloadpanelquizplugin
 
 permissions:
   panelQuiz.command.*:
@@ -44,6 +48,7 @@ permissions:
       wsconnectionplugin.command.judgeanswer: true
       wsconnectionplugin.command.announcequiz: true
       wsconnectionplugin.command.cancelquiz: true
+      wsconnectionplugin.command.reload: true
   panelQuiz.command.startquiz:
     description: Allows you to perform /startquiz command.
     default: op
@@ -61,4 +66,7 @@ permissions:
     default: op
   panelQuiz.command.cancelquiz:
     description: Allows you to perform /cancelquiz command.
+    default: op
+  panelQuiz.command.reload:
+    description: Allows you to perform /reloadpanelquizplugin command.
     default: op

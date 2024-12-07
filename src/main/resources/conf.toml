@@ -1,0 +1,13 @@
+[[buttonPoses]]
+    index = 0
+    world = "world"
+    x = 0
+    y = 0
+    z = 0
+
+[[buttonPoses]]
+    index = 1
+    world = "world"
+    x = 1
+    y = 1
+    z = 1
