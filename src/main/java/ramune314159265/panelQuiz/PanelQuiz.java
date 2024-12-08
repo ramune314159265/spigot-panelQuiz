@@ -1,5 +1,9 @@
 package ramune314159265.panelQuiz;
 
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.TextDisplay;
 import org.bukkit.plugin.java.JavaPlugin;
 import ramune314159265.panelQuiz.commands.*;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
@@ -31,18 +35,26 @@ public final class PanelQuiz extends JavaPlugin {
 		this.getCommand("announcequiz").setExecutor(new AnnounceQuizCommand());
 		this.getCommand("cancelquiz").setExecutor(new CancelQuizCommand());
 		this.getCommand("reloadpanelquizplugin").setExecutor(new ReloadCommand());
+		this.getCommand("openanswers").setExecutor(new OpenAnswersCommand());
 	}
 
 	@Override
 	public void onDisable() {
-		// Plugin shutdown logic
+		Bukkit.getWorlds().forEach((World world) -> {
+			world.getEntitiesByClasses(TextDisplay.class).forEach((Entity textDisplay) -> {
+				if (!textDisplay.hasMetadata("panelQuiz.index")) {
+					return;
+				}
+				textDisplay.remove();
+			});
+		});
 	}
 
 	public void startQuiz(Quiz quizInstance) {
 		this.processingQuiz = quizInstance;
 	}
 
-	public void  cancelQuiz(){
+	public void cancelQuiz() {
 		this.processingQuiz = null;
 	}
 
@@ -50,7 +62,7 @@ public final class PanelQuiz extends JavaPlugin {
 		if (Objects.isNull(this.processingQuiz)) {
 			return false;
 		}
-		if (this.processingQuiz.state == State.JUDGED) {
+		if (this.processingQuiz.state == State.OPENED) {
 			return false;
 		}
 		return true;

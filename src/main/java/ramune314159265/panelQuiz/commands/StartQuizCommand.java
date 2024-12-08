@@ -1,10 +1,12 @@
 package ramune314159265.panelQuiz.commands;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import ramune314159265.panelQuiz.PanelDisplay;
 import ramune314159265.panelQuiz.PanelQuiz;
 import ramune314159265.panelQuiz.quiztypes.FiveLeague;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
@@ -22,6 +24,12 @@ public class StartQuizCommand implements CommandExecutor, TabCompleter {
 			sender.sendMessage(ChatColor.RED + "クイズ「" + PanelQuiz.getInstance().processingQuiz.question + "」が進行中です");
 			return true;
 		}
+
+		PanelDisplay.list.forEach((Integer index, PanelDisplay panelDisplay) -> {
+			panelDisplay.fillPanelBlock(Material.WHITE_CONCRETE);
+			panelDisplay.setPanelText("");
+		});
+
 		String quizType = args[0];
 		String quizTitle = args[1];
 		String quizColumn = args[2];

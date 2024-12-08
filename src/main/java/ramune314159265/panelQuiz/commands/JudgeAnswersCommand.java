@@ -25,12 +25,12 @@ public class JudgeAnswersCommand implements CommandExecutor, TabCompleter {
 			sender.sendMessage(ChatColor.RED + "現在クイズが進行していません");
 			return true;
 		}
-		if (PanelQuiz.getInstance().processingQuiz.state == State.JUDGED) {
+		if (PanelQuiz.getInstance().processingQuiz.state == State.OPENED) {
 			sender.sendMessage(ChatColor.RED + "すでにクイズは終了しています");
 			return true;
 		}
-		if(args.length == 2){
-			try{
+		if (args.length == 2) {
+			try {
 				int index = Math.abs(Integer.parseInt(args[0]));
 				PanelQuiz.getInstance().processingQuiz.setIsCorrect(index, Boolean.valueOf(args[1]));
 			} catch (NumberFormatException e) {
@@ -97,7 +97,7 @@ public class JudgeAnswersCommand implements CommandExecutor, TabCompleter {
 			}
 			return list;
 		}
-		if(args.length == 2){
+		if (args.length == 2) {
 			return Arrays.asList("true", "false");
 		}
 		return null;

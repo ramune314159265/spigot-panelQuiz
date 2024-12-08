@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Config {
-	public Map<Integer, Location> buttonPoses;
+	public Map<Integer, PanelData> panelData;
 	File dataFolder;
 
 	public Config(File dataFolder) {
 		this.dataFolder = dataFolder;
-		this.buttonPoses = new HashMap<>();
+		this.panelData = new HashMap<>();
 	}
 
 	public void load() {
@@ -40,15 +40,40 @@ public class Config {
 
 		Toml configToml = new Toml().read(configFile);
 
-		configToml.getTables("buttonPoses").forEach((Toml buttonPosData) -> {
-			this.buttonPoses.put(
-					Math.toIntExact(buttonPosData.getLong("index")),
-					new Location(
-							Bukkit.getWorld(buttonPosData.getString("world")),
-							buttonPosData.getLong("x"),
-							buttonPosData.getLong("y"),
-							buttonPosData.getLong("z"))
+		configToml.getTables("panels").forEach((Toml panelToml) -> {
+			PanelData panelData = new PanelData(Math.toIntExact(panelToml.getLong("index")));
+
+			panelData.buttonLocation = new Location(
+					Bukkit.getWorld(panelToml.getString("button.world")),
+					panelToml.getLong("button.x"),
+					panelToml.getLong("button.y"),
+					panelToml.getLong("button.z")
+			);
+
+			panelData.textLocation = new Location(
+					Bukkit.getWorld(panelToml.getString("text.world")),
+					panelToml.getLong("text.x"),
+					panelToml.getLong("text.y"),
+					panelToml.getLong("text.z")
+			);
+			panelData.textRotation[0] = panelToml.getLong("text.yaw");
+			panelData.textRotation[1] = panelToml.getLong("text.pitch");
+
+			panelToml.getTables("blocks").forEach((Toml blockToml) -> {
+				panelData.blockLocations.add(new Location(
+						Bukkit.getWorld(blockToml.getString("world")),
+						blockToml.getLong("x"),
+						blockToml.getLong("y"),
+						blockToml.getLong("z")
+				));
+			});
+
+			this.panelData.put(
+					Math.toIntExact(panelToml.getLong("index")),
+					panelData
 			);
 		});
+
+		PanelDisplay.setList();
 	}
 }

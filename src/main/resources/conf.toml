@@ -1,13 +1,49 @@
-[[buttonPoses]]
-    index = 0
-    world = "world"
-    x = 0
-    y = 0
-    z = 0
+[[panels]]
+index = 0
+[panels.button]
+world = "world"
+x = 0
+y = 0
+z = 0
+[panels.text]
+world = "world"
+x = 0
+y = 0
+z = 0
+yaw = 0
+pitch = 0
+[[panels.blocks]]
+world = "world"
+x = 39
+y = -47
+z = -58
+[[panels.blocks]]
+world = "world"
+x = 38
+y = -47
+z = -58
 
-[[buttonPoses]]
-    index = 1
-    world = "world"
-    x = 1
-    y = 1
-    z = 1
+[[panels]]
+index = 1
+[panels.button]
+world = "world"
+x = 1
+y = 1
+z = 1
+[panels.text]
+world = "world"
+x = 0
+y = 0
+z = 0
+yaw = 0
+pitch = 0
+[[panels.blocks]]
+world = "world"
+x = 35
+y = -47
+z = -58
+[[panels.blocks]]
+world = "world"
+x = 34
+y = -47
+z = -58

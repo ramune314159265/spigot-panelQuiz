@@ -5,7 +5,7 @@ import org.bukkit.ChatColor;
 public enum State {
 	ANSWERING(ChatColor.GREEN + "回答受付中"),
 	LOCKED(ChatColor.RED + "回答ロック中"),
-	JUDGED(ChatColor.LIGHT_PURPLE + "正解判定後");
+	OPENED(ChatColor.LIGHT_PURPLE + "正誤発表後");
 
 	final String string;
 
