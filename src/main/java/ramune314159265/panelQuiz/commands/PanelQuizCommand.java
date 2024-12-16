@@ -11,16 +11,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class panelQuizCommand implements CommandExecutor, TabCompleter {
+public class PanelQuizCommand implements CommandExecutor, TabCompleter {
 	static SubCommand[] commands = {
-			new ReloadCommand(),
-			new StartQuizCommand(),
-			new ShowQuizInfoCommand(),
+			new AnnounceQuizCommand(),
+			new CancelQuizCommand(),
+			new JudgeAnswersCommand(),
 			new LockQuizCommand(),
 			new OpenAnswersCommand(),
-			new JudgeAnswersCommand(),
-			new CancelQuizCommand(),
-			new AnnounceQuizCommand()
+			new ReloadCommand(),
+			new ShowQuizInfoCommand(),
+			new StartQuizCommand(),
 	};
 
 	@Override
@@ -32,11 +32,11 @@ public class panelQuizCommand implements CommandExecutor, TabCompleter {
 
 		String subCommandName = argsArray.get(0);
 
-		Optional<SubCommand> subCommandOptional = Arrays.stream(panelQuizCommand.commands)
+		Optional<SubCommand> subCommandOptional = Arrays.stream(PanelQuizCommand.commands)
 				.filter(c -> c.getName().equals(subCommandName))
 				.findFirst();
 		if (subCommandOptional.isEmpty()) {
-			sender.sendMessage(ChatColor.RED + "サブコマンド: " + String.join(", ", Arrays.stream(panelQuizCommand.commands).map(SubCommand::getName).toList()));
+			sender.sendMessage(ChatColor.RED + "サブコマンド: " + String.join(", ", Arrays.stream(PanelQuizCommand.commands).map(SubCommand::getName).toList()));
 			return true;
 		}
 
@@ -50,12 +50,12 @@ public class panelQuizCommand implements CommandExecutor, TabCompleter {
 			return null;
 		}
 		if (args.length == 1) {
-			return Arrays.stream(panelQuizCommand.commands)
+			return Arrays.stream(PanelQuizCommand.commands)
 					.filter(SubCommand::isAvailable)
 					.map(SubCommand::getName).toList();
 		}
 		if (2 <= args.length) {
-			return Arrays.stream(panelQuizCommand.commands)
+			return Arrays.stream(PanelQuizCommand.commands)
 					.filter(c -> c.getName().equals(args[0]))
 					.findFirst()
 					.map(subCommand -> subCommand.onTabComplete(sender, Arrays.asList(args)))
