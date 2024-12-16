@@ -1,14 +1,11 @@
-package ramune314159265.panelQuiz.commands;
+package ramune314159265.panelQuiz.commands.subcommands;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import ramune314159265.panelQuiz.AnswerData;
 import ramune314159265.panelQuiz.PanelQuiz;
 import ramune314159265.panelQuiz.State;
@@ -18,28 +15,33 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class JudgeAnswersCommand implements CommandExecutor, TabCompleter {
+public class JudgeAnswersCommand extends SubCommand {
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	public String getName() {
+		return "judge";
+	}
+
+	@Override
+	public void onCommand(CommandSender sender, List<String> args) {
 		if (!PanelQuiz.getInstance().isQuizProcessing()) {
 			sender.sendMessage(ChatColor.RED + "現在クイズが進行していません");
-			return true;
+			return;
 		}
 		if (PanelQuiz.getInstance().processingQuiz.state == State.OPENED) {
 			sender.sendMessage(ChatColor.RED + "すでにクイズは終了しています");
-			return true;
+			return;
 		}
-		if (args.length == 2) {
+		if (args.size() == 3) {
 			try {
-				int index = Math.abs(Integer.parseInt(args[0]));
-				PanelQuiz.getInstance().processingQuiz.setIsCorrect(index, Boolean.valueOf(args[1]));
+				int index = Math.abs(Integer.parseInt(args.get(1)));
+				PanelQuiz.getInstance().processingQuiz.setIsCorrect(index, Boolean.valueOf(args.get(2)));
 			} catch (NumberFormatException e) {
 				sender.sendMessage(ChatColor.RED + "無効な数値です");
 			}
 		}
-		if (PanelQuiz.getInstance().processingQuiz.isAnswerable() && args.length == 0) {
+		if (PanelQuiz.getInstance().processingQuiz.isAnswerable() && args.size() == 1) {
 			BaseComponent[] warnMessageComponent = new ComponentBuilder("回答がロックされていません。回答をロックするには").color(ChatColor.YELLOW)
-					.append(" /lockquiz ").color(ChatColor.YELLOW).underlined(true).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/lockquiz"))
+					.append(" /panelquiz lock ").color(ChatColor.YELLOW).underlined(true).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/panelquiz lock"))
 					.append("を実行してください。").underlined(false).color(ChatColor.YELLOW).create();
 			sender.spigot().sendMessage(warnMessageComponent);
 		}
@@ -71,20 +73,16 @@ public class JudgeAnswersCommand implements CommandExecutor, TabCompleter {
 							.append("クリックして" + (answerData.isCorrect ? "不正解" : "正解") + "に変更")
 							.create()
 					))
-					.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/judgeanswer " + i + " " + (answerData.isCorrect ? "false" : "true")))
+					.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/panelquiz judge " + i + " " + (answerData.isCorrect ? "false" : "true")))
 					.append(", ").color(ChatColor.WHITE).bold(false);
 		}
 
 		sender.spigot().sendMessage(component.create());
-		return true;
 	}
 
 	@Override
-	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-		if (!command.getName().equalsIgnoreCase("judgeanswer")) {
-			return null;
-		}
-		if (args.length == 1) {
+	public List<String> onTabComplete(CommandSender sender, List<String> args) {
+		if (args.size() == 2) {
 			if (!PanelQuiz.getInstance().isQuizProcessing()) {
 				return null;
 			}
@@ -97,9 +95,14 @@ public class JudgeAnswersCommand implements CommandExecutor, TabCompleter {
 			}
 			return list;
 		}
-		if (args.length == 2) {
+		if (args.size() == 3) {
 			return Arrays.asList("true", "false");
 		}
 		return null;
+	}
+
+	@Override
+	public boolean isAvailable() {
+		return PanelQuiz.getInstance().isQuizProcessing();
 	}
 }

@@ -1,20 +1,24 @@
-package ramune314159265.panelQuiz.commands;
+package ramune314159265.panelQuiz.commands.subcommands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import ramune314159265.panelQuiz.AnswerData;
 import ramune314159265.panelQuiz.PanelQuiz;
 
+import java.util.List;
 import java.util.Objects;
 
-public class ShowQuizInfoCommand implements CommandExecutor {
+public class ShowQuizInfoCommand extends SubCommand {
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	public String getName() {
+		return "info";
+	}
+
+	@Override
+	public void onCommand(CommandSender sender, List<String> args) {
 		if (!PanelQuiz.getInstance().isQuizProcessing()) {
 			sender.sendMessage(ChatColor.RED + "現在クイズが進行していません");
-			return true;
+			return;
 		}
 		sender.sendMessage(
 				"----------進行中のクイズ情報----------",
@@ -35,6 +39,15 @@ public class ShowQuizInfoCommand implements CommandExecutor {
 					) + answerData.content + ChatColor.RESET + " (" + answerData.answererName + ")"
 			);
 		}
-		return true;
+	}
+
+	@Override
+	public List<String> onTabComplete(CommandSender sender, List<String> args) {
+		return null;
+	}
+
+	@Override
+	public boolean isAvailable() {
+		return PanelQuiz.getInstance().isQuizProcessing();
 	}
 }

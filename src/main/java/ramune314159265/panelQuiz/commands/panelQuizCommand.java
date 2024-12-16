@@ -5,8 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import ramune314159265.panelQuiz.commands.subcommands.ReloadCommand;
-import ramune314159265.panelQuiz.commands.subcommands.SubCommand;
+import ramune314159265.panelQuiz.commands.subcommands.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +14,13 @@ import java.util.Optional;
 public class panelQuizCommand implements CommandExecutor, TabCompleter {
 	static SubCommand[] commands = {
 			new ReloadCommand(),
+			new StartQuizCommand(),
+			new ShowQuizInfoCommand(),
+			new LockQuizCommand(),
+			new OpenAnswersCommand(),
+			new JudgeAnswersCommand(),
+			new CancelQuizCommand(),
+			new AnnounceQuizCommand()
 	};
 
 	@Override
@@ -52,8 +58,8 @@ public class panelQuizCommand implements CommandExecutor, TabCompleter {
 			return Arrays.stream(panelQuizCommand.commands)
 					.filter(c -> c.getName().equals(args[0]))
 					.findFirst()
-						.map(subCommand -> subCommand.onTabComplete(sender, Arrays.asList(args)))
-						.orElse(null);
+					.map(subCommand -> subCommand.onTabComplete(sender, Arrays.asList(args)))
+					.orElse(List.of());
 		}
 		return null;
 	}

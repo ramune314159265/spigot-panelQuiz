@@ -6,6 +6,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.plugin.java.JavaPlugin;
 import ramune314159265.panelQuiz.commands.*;
+import ramune314159265.panelQuiz.commands.subcommands.OpenAnswersCommand;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
 
 import java.util.Objects;
@@ -28,15 +29,7 @@ public final class PanelQuiz extends JavaPlugin {
 
 		this.getServer().getPluginManager().registerEvents(new PluginListener(), this);
 		this.getCommand("panelquiz").setExecutor(new panelQuizCommand());
-		this.getCommand("startquiz").setExecutor(new StartQuizCommand());
 		this.getCommand("answerquestion").setExecutor(new AnswerQuestionCommand());
-		this.getCommand("lockquiz").setExecutor(new LockQuizCommand());
-		this.getCommand("showquizinfo").setExecutor(new ShowQuizInfoCommand());
-		this.getCommand("judgeanswer").setExecutor(new JudgeAnswersCommand());
-		this.getCommand("announcequiz").setExecutor(new AnnounceQuizCommand());
-		this.getCommand("cancelquiz").setExecutor(new CancelQuizCommand());
-		this.getCommand("reloadpanelquizplugin").setExecutor(new ReloadCommand());
-		this.getCommand("openanswers").setExecutor(new OpenAnswersCommand());
 	}
 
 	@Override

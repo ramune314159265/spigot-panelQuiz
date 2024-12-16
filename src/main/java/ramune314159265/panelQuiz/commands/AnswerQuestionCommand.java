@@ -7,9 +7,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import ramune314159265.panelQuiz.PanelQuiz;
+import ramune314159265.panelQuiz.State;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 public class AnswerQuestionCommand implements CommandExecutor {
@@ -23,8 +25,8 @@ public class AnswerQuestionCommand implements CommandExecutor {
 			sender.sendMessage(ChatColor.RED + "現在クイズが進行していません");
 			return true;
 		}
-		if (!PanelQuiz.getInstance().processingQuiz.isAnswerable()) {
-			sender.sendMessage(ChatColor.RED + "現在クイズに回答できません");
+		if (PanelQuiz.getInstance().processingQuiz.state == State.LOCKED) {
+			sender.sendMessage(ChatColor.RED + "現在回答がロックされています");
 			return true;
 		}
 		if (args.length != 1) {
@@ -48,7 +50,7 @@ public class AnswerQuestionCommand implements CommandExecutor {
 						} else {
 							sender.sendMessage(ChatColor.RED + "正しく入力されていません");
 						}
-						return Arrays.asList(AnvilGUI.ResponseAction.close());
+						return List.of(AnvilGUI.ResponseAction.close());
 					})
 					.text(defaultMessage)
 					.title(PanelQuiz.getInstance().processingQuiz.question)

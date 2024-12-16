@@ -1,6 +1,5 @@
 package ramune314159265.panelQuiz.commands.subcommands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import ramune314159265.panelQuiz.PanelQuiz;
 
