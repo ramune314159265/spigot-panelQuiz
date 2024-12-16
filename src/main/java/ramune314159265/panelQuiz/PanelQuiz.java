@@ -27,6 +27,7 @@ public final class PanelQuiz extends JavaPlugin {
 		this.config.load();
 
 		this.getServer().getPluginManager().registerEvents(new PluginListener(), this);
+		this.getCommand("panelquiz").setExecutor(new panelQuizCommand());
 		this.getCommand("startquiz").setExecutor(new StartQuizCommand());
 		this.getCommand("answerquestion").setExecutor(new AnswerQuestionCommand());
 		this.getCommand("lockquiz").setExecutor(new LockQuizCommand());

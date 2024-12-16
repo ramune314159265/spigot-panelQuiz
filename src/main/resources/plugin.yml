@@ -5,6 +5,10 @@ api-version: '1.20'
 authors: [ ramune314159265 ]
 description: Minecraft PanelQuiz
 commands:
+  panelQuiz:
+    description: A command for managing this plugin
+    permission: panelQuiz.command.panelquiz
+    usage: /panelquiz <subCommand>
   startQuiz:
     description: Start a new quiz
     permission: panelQuiz.command.startquiz
@@ -46,6 +50,7 @@ permissions:
   panelQuiz.command.*:
     description: Allows you to perform commands in this plugin.
     children:
+      wsconnectionplugin.command.panelquiz: true
       wsconnectionplugin.command.startquiz: true
       wsconnectionplugin.command.lockquiz: true
       wsconnectionplugin.command.showquizinfo: true
@@ -54,6 +59,9 @@ permissions:
       wsconnectionplugin.command.cancelquiz: true
       wsconnectionplugin.command.reload: true
       wsconnectionplugin.command.openanswers: true
+  panelQuiz.command.panelquiz:
+    description: Allows you to perform /panelquiz command.
+    default: op
   panelQuiz.command.startquiz:
     description: Allows you to perform /startquiz command.
     default: op

@@ -1,17 +1,10 @@
 package ramune314159265.panelQuiz.quiztypes;
 
 import ramune314159265.panelQuiz.AnswerData;
-import ramune314159265.panelQuiz.State;
-
-import java.util.HashMap;
 
 public class FiveLeague extends Quiz {
 	public FiveLeague(String question, String quizColumn) {
-		this.answers = new HashMap<>();
-		this.question = question;
-		this.quizColumn = quizColumn;
-		this.state = State.ANSWERING;
-		this.maximumIndex = 0;
+		super(question, quizColumn);
 	}
 
 	@Override
@@ -22,18 +15,5 @@ public class FiveLeague extends Quiz {
 		this.answers.put(index, new AnswerData(answer, answererName));
 		this.maximumIndex = Math.max(index, this.maximumIndex);
 		return true;
-	}
-
-	@Override
-	public boolean isAnswerable() {
-		return this.state == State.ANSWERING;
-	}
-
-	@Override
-	public void setIsCorrect(Integer index, Boolean isCorrect) {
-		if (!this.answers.containsKey(index)) {
-			return;
-		}
-		this.answers.get(index).setIsCorrect(isCorrect);
 	}
 }
