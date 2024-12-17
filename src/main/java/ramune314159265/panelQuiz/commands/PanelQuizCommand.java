@@ -14,6 +14,7 @@ import java.util.Optional;
 public class PanelQuizCommand implements CommandExecutor, TabCompleter {
 	static SubCommand[] commands = {
 			new AnnounceQuizCommand(),
+			new AnswerQuestionAsCommand(),
 			new CancelQuizCommand(),
 			new JudgeAnswersCommand(),
 			new LockQuizCommand(),
@@ -21,6 +22,7 @@ public class PanelQuizCommand implements CommandExecutor, TabCompleter {
 			new ReloadCommand(),
 			new ShowQuizInfoCommand(),
 			new StartQuizCommand(),
+			new UnlockQuizCommand(),
 	};
 
 	@Override

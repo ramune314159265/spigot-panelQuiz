@@ -1,6 +1,5 @@
 package ramune314159265.panelQuiz.commands;
 
-import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,9 +9,6 @@ import ramune314159265.panelQuiz.PanelQuiz;
 import ramune314159265.panelQuiz.State;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
 public class AnswerQuestionCommand implements CommandExecutor {
 	@Override
