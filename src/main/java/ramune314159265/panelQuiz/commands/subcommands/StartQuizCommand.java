@@ -8,7 +8,6 @@ import ramune314159265.panelQuiz.PanelQuiz;
 import ramune314159265.panelQuiz.quiztypes.FiveLeague;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class StartQuizCommand extends SubCommand {
