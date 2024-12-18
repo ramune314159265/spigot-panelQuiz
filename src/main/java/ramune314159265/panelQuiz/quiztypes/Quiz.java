@@ -34,24 +34,27 @@ public class Quiz {
 		this.maximumIndex = 0;
 	}
 
-	public boolean answerQuestion(Integer index, String answererName, String answer) {
-		this.answers.put(index, new AnswerData(answer, answererName));
-		this.maximumIndex = Math.max(index, this.maximumIndex);
-		return true;
-	}
-
-	public boolean isAnswerable() {
+	public final boolean isAnswerable() {
 		return this.state == State.ANSWERING;
 	}
 
-	public void setIsCorrect(Integer index, Boolean isCorrect) {
+	public final void setIsCorrect(Integer index, Boolean isCorrect) {
 		if (!this.answers.containsKey(index)) {
 			return;
 		}
 		this.answers.get(index).setIsCorrect(isCorrect);
 	}
 
-	public void handleAnnounceCommand(CommandSender sender, List<String> args){
+	public final void answerQuestion(Integer index, String answererName, String answer) {
+		this.answers.put(index, new AnswerData(answer, answererName));
+		this.maximumIndex = Math.max(index, this.maximumIndex);
+	}
+
+	public boolean isValidAnswer(String answer) {
+		return true;
+	}
+
+	public void handleAnnounceCommand(CommandSender sender, List<String> args) {
 		String preTitle = args.get(1);
 
 		for (Player p : PanelQuiz.getInstance().getServer().getOnlinePlayers()) {
@@ -117,7 +120,7 @@ public class Quiz {
 		sender.spigot().sendMessage(component.create());
 	}
 
-	public void handleOpenCommand(CommandSender sender, List<String> args){
+	public void handleOpenCommand(CommandSender sender, List<String> args) {
 		for (int i = 0; i <= PanelQuiz.getInstance().processingQuiz.maximumIndex; i++) {
 			AnswerData answerData = PanelQuiz.getInstance().processingQuiz.answers.get(i);
 			if (Objects.isNull(answerData)) {
@@ -131,7 +134,7 @@ public class Quiz {
 		PanelQuiz.getInstance().processingQuiz.state = State.OPENED;
 	}
 
-	public void handleAnswerCommand(CommandSender sender, List<String> args){
+	public void handleAnswerCommand(CommandSender sender, List<String> args) {
 		try {
 			int index = Math.abs(Integer.parseInt(args.get(0)));
 			String defaultMessage = index + "番目の答え";
@@ -144,12 +147,14 @@ public class Quiz {
 							return Collections.emptyList();
 						}
 
-						boolean isSucceeded = PanelQuiz.getInstance().processingQuiz.answerQuestion(index, sender.getName(), stateSnapshot.getText());
-						if (isSucceeded) {
-							sender.sendMessage(ChatColor.GREEN + "「" + stateSnapshot.getText() + "」と回答しました");
-						} else {
+						if (!PanelQuiz.getInstance().processingQuiz.isValidAnswer(stateSnapshot.getText())) {
 							sender.sendMessage(ChatColor.RED + "正しく入力されていません");
+							return List.of(AnvilGUI.ResponseAction.close());
 						}
+
+						PanelQuiz.getInstance().processingQuiz.answerQuestion(index, sender.getName(), stateSnapshot.getText());
+						sender.sendMessage(ChatColor.GREEN + "「" + stateSnapshot.getText() + "」と回答しました");
+
 						return List.of(AnvilGUI.ResponseAction.close());
 					})
 					.text(defaultMessage)

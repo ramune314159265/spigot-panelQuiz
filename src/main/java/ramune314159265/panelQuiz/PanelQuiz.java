@@ -5,7 +5,8 @@ import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.TextDisplay;
 import org.bukkit.plugin.java.JavaPlugin;
-import ramune314159265.panelQuiz.commands.*;
+import ramune314159265.panelQuiz.commands.AnswerQuestionCommand;
+import ramune314159265.panelQuiz.commands.PanelQuizCommand;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
 
 import java.util.Objects;
@@ -55,9 +56,6 @@ public final class PanelQuiz extends JavaPlugin {
 		if (Objects.isNull(this.processingQuiz)) {
 			return false;
 		}
-		if (this.processingQuiz.state == State.OPENED) {
-			return false;
-		}
-		return true;
+		return this.processingQuiz.state != State.OPENED;
 	}
 }

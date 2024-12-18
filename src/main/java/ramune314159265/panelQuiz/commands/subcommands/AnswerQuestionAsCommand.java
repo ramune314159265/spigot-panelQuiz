@@ -18,7 +18,7 @@ public class AnswerQuestionAsCommand extends SubCommand {
 			sender.sendMessage(ChatColor.RED + "現在クイズが進行していません");
 			return;
 		}
-		if (args.size() == 3) {
+		if (args.size() != 4) {
 			sender.sendMessage(ChatColor.RED + "/panelquiz answeras <answererName> <index> <answer>");
 			return;
 		}
@@ -27,13 +27,8 @@ public class AnswerQuestionAsCommand extends SubCommand {
 		Integer index = Math.abs(Integer.parseInt(args.get(2)));
 		String content = args.get(3);
 
-		boolean isSucceed = PanelQuiz.getInstance().processingQuiz.answerQuestion(index, answererName, content);
-
-		if (isSucceed) {
-			sender.sendMessage(index + "番目に" + answererName + "として" + "「" + content + "」と回答しました");
-		} else {
-			sender.sendMessage(ChatColor.RED + "正しく入力されていません");
-		}
+		PanelQuiz.getInstance().processingQuiz.answerQuestion(index, answererName, content);
+		sender.sendMessage(index + "番目に" + answererName + "として" + "「" + content + "」と回答しました");
 	}
 
 	@Override
