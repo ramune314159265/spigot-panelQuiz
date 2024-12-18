@@ -127,6 +127,9 @@ public class Quiz {
 				continue;
 			}
 			PanelDisplay panelDisplay = PanelDisplay.list.get(i);
+			if (Objects.isNull(panelDisplay)) {
+				continue;
+			}
 			panelDisplay.setPanelText(answerData.content);
 			panelDisplay.fillPanelBlock(answerData.isCorrect ? Material.RED_CONCRETE : Material.BLUE_CONCRETE);
 		}
