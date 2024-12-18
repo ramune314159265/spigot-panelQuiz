@@ -1,15 +1,11 @@
 package ramune314159265.panelQuiz.quiztypes;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import ramune314159265.panelQuiz.PanelQuiz;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -34,15 +30,6 @@ public class FiveLeague extends Quiz {
 
 		ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 		exec.schedule(() -> {
-			if (Objects.isNull(this.questionBossBar)) {
-				this.questionBossBar = Bukkit.createBossBar(
-						ChatColor.GREEN.toString() + ChatColor.BOLD + PanelQuiz.getInstance().processingQuiz.question,
-						BarColor.RED,
-						BarStyle.SOLID
-				);
-				this.questionBossBar.setProgress(1);
-			}
-
 			for (Player p : PanelQuiz.getInstance().getServer().getOnlinePlayers()) {
 				p.sendMessage(ChatColor.GREEN + "Q. " + ChatColor.BOLD + PanelQuiz.getInstance().processingQuiz.question + "\n" + ChatColor.RESET +
 						" ".repeat(50) + ChatColor.AQUA + "A. " + PanelQuiz.getInstance().processingQuiz.quizColumn);

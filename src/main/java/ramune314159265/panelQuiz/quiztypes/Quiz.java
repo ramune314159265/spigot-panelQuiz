@@ -37,7 +37,12 @@ public class Quiz {
 		this.quizColumn = quizColumn;
 		this.state = State.ANSWERING;
 		this.maximumIndex = 0;
-		this.questionBossBar = null;
+		this.questionBossBar = Bukkit.createBossBar(
+				ChatColor.GREEN.toString() + ChatColor.BOLD + this.question,
+				BarColor.RED,
+				BarStyle.SOLID
+		);
+		this.questionBossBar.setProgress(1);
 	}
 
 	public final boolean isAnswerable() {
@@ -69,15 +74,6 @@ public class Quiz {
 
 		ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 		exec.schedule(() -> {
-			if (Objects.isNull(this.questionBossBar)) {
-				this.questionBossBar = Bukkit.createBossBar(
-						ChatColor.GREEN.toString() + ChatColor.BOLD + PanelQuiz.getInstance().processingQuiz.question,
-						BarColor.RED,
-						BarStyle.SOLID
-				);
-				this.questionBossBar.setProgress(1);
-			}
-
 			for (Player p : PanelQuiz.getInstance().getServer().getOnlinePlayers()) {
 				p.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + PanelQuiz.getInstance().processingQuiz.question + "\n" + ChatColor.RESET + PanelQuiz.getInstance().processingQuiz.quizColumn);
 				this.questionBossBar.addPlayer(p);
