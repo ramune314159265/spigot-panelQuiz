@@ -5,8 +5,12 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.wesjd.anvilgui.AnvilGUI;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import ramune314159265.panelQuiz.AnswerData;
@@ -25,6 +29,7 @@ public class Quiz {
 	public String quizColumn;
 	public State state;
 	public Integer maximumIndex;
+	public BossBar questionBossBar;
 
 	public Quiz(String question, String quizColumn) {
 		this.answers = new HashMap<>();
@@ -32,6 +37,7 @@ public class Quiz {
 		this.quizColumn = quizColumn;
 		this.state = State.ANSWERING;
 		this.maximumIndex = 0;
+		this.questionBossBar = null;
 	}
 
 	public final boolean isAnswerable() {
@@ -63,8 +69,18 @@ public class Quiz {
 
 		ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
 		exec.schedule(() -> {
+			if (Objects.isNull(this.questionBossBar)) {
+				this.questionBossBar = Bukkit.createBossBar(
+						ChatColor.GREEN.toString() + ChatColor.BOLD + PanelQuiz.getInstance().processingQuiz.question,
+						BarColor.RED,
+						BarStyle.SOLID
+				);
+				this.questionBossBar.setProgress(1);
+			}
+
 			for (Player p : PanelQuiz.getInstance().getServer().getOnlinePlayers()) {
 				p.sendMessage(ChatColor.GREEN.toString() + ChatColor.BOLD + PanelQuiz.getInstance().processingQuiz.question + "\n" + ChatColor.RESET + PanelQuiz.getInstance().processingQuiz.quizColumn);
+				this.questionBossBar.addPlayer(p);
 			}
 			exec.shutdown();
 		}, 3, TimeUnit.SECONDS);
@@ -132,6 +148,10 @@ public class Quiz {
 			}
 			panelDisplay.setPanelText(answerData.content);
 			panelDisplay.fillPanelBlock(answerData.isCorrect ? Material.RED_CONCRETE : Material.BLUE_CONCRETE);
+		}
+
+		for (Player p : PanelQuiz.getInstance().getServer().getOnlinePlayers()) {
+			this.questionBossBar.removePlayer(p);
 		}
 
 		PanelQuiz.getInstance().processingQuiz.state = State.OPENED;
