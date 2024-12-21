@@ -67,7 +67,8 @@ public class FiveLeague extends Quiz {
 			BukkitScheduler openExec = Bukkit.getScheduler();
 			openExec.runTaskTimer(PanelQuiz.getInstance(), (BukkitTask task) -> {
 				if (this.maximumIndex < i.get()) {
-					Bukkit.broadcastMessage(ChatColor.GREEN + "結果: " + String.join("", showAnswerStrings));
+					Bukkit.broadcastMessage(ChatColor.GREEN + "問題: " + ChatColor.BOLD + PanelQuiz.getInstance().processingQuiz.question + "\n" + ChatColor.RESET +
+							ChatColor.GREEN + "結果: " + String.join("", showAnswerStrings));
 					openExec.cancelTask(task.getTaskId());
 					return;
 				}
