@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import ramune314159265.panelQuiz.PanelDisplay;
 import ramune314159265.panelQuiz.PanelQuiz;
+import ramune314159265.panelQuiz.quiztypes.AllMatch;
 import ramune314159265.panelQuiz.quiztypes.FiveLeague;
 import ramune314159265.panelQuiz.quiztypes.Quiz;
 
@@ -37,10 +38,16 @@ public class StartQuizCommand extends SubCommand {
 		String quizColumn = args.get(3);
 
 		switch (quizType) {
-			case "fiveleague":
+			case "fiveleague": {
 				Quiz quizInstance = new FiveLeague(quizTitle, quizColumn);
 				PanelQuiz.getInstance().startQuiz(quizInstance);
 				break;
+			}
+			case "allmatch": {
+				Quiz quizInstance = new AllMatch(quizTitle);
+				PanelQuiz.getInstance().startQuiz(quizInstance);
+				break;
+			}
 			default:
 				sender.sendMessage(ChatColor.RED + "存在しないクイズタイプです");
 				return;
@@ -51,7 +58,7 @@ public class StartQuizCommand extends SubCommand {
 	@Override
 	public List<String> onTabComplete(CommandSender sender, List<String> args) {
 		if (args.size() == 2) {
-			return List.of("fiveleague");
+			return List.of("fiveleague", "allmatch");
 		}
 		return null;
 	}
