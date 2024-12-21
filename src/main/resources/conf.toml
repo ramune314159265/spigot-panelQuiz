@@ -7,11 +7,11 @@ y = 0
 z = 0
 [panels.text]
 world = "world"
-x = 0
-y = 0
-z = 0
-yaw = 0
-pitch = 0
+x = "0"
+y = "0"
+z = "0"
+yaw = "0"
+pitch = "0"
 size = "6"
 [[panels.blocks]]
 world = "world"
@@ -33,11 +33,11 @@ y = 1
 z = 1
 [panels.text]
 world = "world"
-x = 0
-y = 0
-z = 0
-yaw = 0
-pitch = 0
+x = "0"
+y = "0"
+z = "0"
+yaw = "0"
+pitch = "0"
 size = "6"
 [[panels.blocks]]
 world = "world"

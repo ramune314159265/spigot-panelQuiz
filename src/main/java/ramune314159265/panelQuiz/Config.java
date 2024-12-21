@@ -52,12 +52,12 @@ public class Config {
 
 			panelData.textLocation = new Location(
 					Bukkit.getWorld(panelToml.getString("text.world")),
-					panelToml.getLong("text.x"),
-					panelToml.getLong("text.y"),
-					panelToml.getLong("text.z")
+					Double.parseDouble(panelToml.getString("text.x")),
+					Double.parseDouble(panelToml.getString("text.y")),
+					Double.parseDouble(panelToml.getString("text.z"))
 			);
-			panelData.textRotation[0] = panelToml.getLong("text.yaw");
-			panelData.textRotation[1] = panelToml.getLong("text.pitch");
+			panelData.textRotation[0] = Float.parseFloat(panelToml.getString("text.yaw"));
+			panelData.textRotation[1] = Float.parseFloat(panelToml.getString("text.pitch"));
 			panelData.textSize = Float.parseFloat(panelToml.getString("text.size"));
 
 			panelToml.getTables("blocks").forEach((Toml blockToml) -> {
