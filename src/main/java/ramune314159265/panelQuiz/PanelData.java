@@ -11,6 +11,7 @@ public class PanelData {
 	public List<Location> blockLocations;
 	public Location textLocation;
 	public float[] textRotation;
+	public float textSize;
 
 	public PanelData(int index) {
 		this.index = index;
@@ -18,5 +19,6 @@ public class PanelData {
 		this.textLocation = null;
 		this.textRotation = new float[2];
 		this.blockLocations = new ArrayList<>();
+		this.textSize = 1;
 	}
 }

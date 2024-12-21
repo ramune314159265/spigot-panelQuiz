@@ -12,6 +12,7 @@ y = 0
 z = 0
 yaw = 0
 pitch = 0
+size = "6"
 [[panels.blocks]]
 world = "world"
 x = 39
@@ -37,6 +38,7 @@ y = 0
 z = 0
 yaw = 0
 pitch = 0
+size = "6"
 [[panels.blocks]]
 world = "world"
 x = 35

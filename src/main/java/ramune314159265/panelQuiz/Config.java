@@ -58,6 +58,7 @@ public class Config {
 			);
 			panelData.textRotation[0] = panelToml.getLong("text.yaw");
 			panelData.textRotation[1] = panelToml.getLong("text.pitch");
+			panelData.textSize = Float.parseFloat(panelToml.getString("text.size"));
 
 			panelToml.getTables("blocks").forEach((Toml blockToml) -> {
 				panelData.blockLocations.add(new Location(

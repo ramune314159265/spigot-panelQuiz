@@ -49,6 +49,7 @@ public class PanelDisplay {
 					}
 					textDisplay.remove();
 				});
+		float textSize = panelData.textSize * (2F / Math.max(text.length(), 2F));
 
 		TextDisplay textDisplay = (TextDisplay) panelData.textLocation.getWorld().spawnEntity(panelData.textLocation, EntityType.TEXT_DISPLAY);
 		textDisplay.setText(text);
@@ -57,7 +58,7 @@ public class PanelDisplay {
 		textDisplay.setTransformation(new Transformation(
 				new Vector3f(),
 				new AxisAngle4f(),
-				new Vector3f(5.0F, 5.0F, 5.0F),
+				new Vector3f(textSize, textSize, textSize),
 				new AxisAngle4f()
 		));
 		textDisplay.setRotation(panelData.textRotation[0], panelData.textRotation[1]);
