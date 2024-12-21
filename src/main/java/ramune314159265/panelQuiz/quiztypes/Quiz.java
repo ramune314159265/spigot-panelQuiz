@@ -166,13 +166,14 @@ public class Quiz {
 							return Collections.emptyList();
 						}
 
-						if (!PanelQuiz.getInstance().processingQuiz.isValidAnswer(stateSnapshot.getText())) {
+						String defaultMessageRemoved = stateSnapshot.getText().replace(defaultMessage, "");
+						if (!PanelQuiz.getInstance().processingQuiz.isValidAnswer(defaultMessageRemoved)) {
 							sender.sendMessage(ChatColor.RED + "正しく入力されていません");
 							return List.of(AnvilGUI.ResponseAction.close());
 						}
 
-						PanelQuiz.getInstance().processingQuiz.answerQuestion(index, sender.getName(), stateSnapshot.getText());
-						sender.sendMessage(ChatColor.GREEN + "「" + stateSnapshot.getText() + "」と回答しました");
+						PanelQuiz.getInstance().processingQuiz.answerQuestion(index, sender.getName(), defaultMessageRemoved);
+						sender.sendMessage(ChatColor.GREEN + "「" + defaultMessageRemoved + "」と回答しました");
 
 						return List.of(AnvilGUI.ResponseAction.close());
 					})
