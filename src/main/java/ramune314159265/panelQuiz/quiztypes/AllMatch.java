@@ -142,7 +142,7 @@ public class AllMatch extends Quiz {
 					return;
 				}
 				panelDisplay.setPanelText(answerData.content);
-				panelDisplay.fillPanelBlock(answerData.isCorrect ? Material.RED_CONCRETE : Material.BLUE_CONCRETE);
+				panelDisplay.fillPanelBlock(Material.GREEN_CONCRETE);
 
 				i.getAndIncrement();
 			}, 0, 60);
