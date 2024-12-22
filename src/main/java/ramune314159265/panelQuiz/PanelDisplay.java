@@ -52,6 +52,12 @@ public class PanelDisplay {
 		float textSize = panelData.textSize * (2F / Math.max(text.length(), 2F));
 
 		TextDisplay textDisplay = (TextDisplay) panelData.textLocation.getWorld().spawnEntity(panelData.textLocation, EntityType.TEXT_DISPLAY);
+		textDisplay.teleport(new Location(
+				panelData.textLocation.getWorld(),
+				panelData.textLocation.getX(),
+				panelData.textLocation.getY() - (panelData.textSize / 8) * (2F / Math.max(text.length(), 2F)),
+				panelData.textLocation.getZ()
+		));
 		textDisplay.setText(text);
 		textDisplay.setBackgroundColor(org.bukkit.Color.fromARGB(0, 0, 0, 0));
 		textDisplay.setBrightness(new Display.Brightness(15, 15));
